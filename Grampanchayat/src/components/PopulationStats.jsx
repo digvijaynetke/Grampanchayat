@@ -1,0 +1,102 @@
+const PopulationStats = () => {
+  const placeholder = '-';
+  const genderStats = [
+    { category: 'महिला', female: placeholder, male: placeholder, total: placeholder },
+    { category: 'पुरुष', female: placeholder, male: placeholder, total: placeholder },
+    { category: 'एकूण लोकसंख्या', female: placeholder, male: placeholder, total: placeholder },
+  ];
+
+  const casteStats = [
+    { category: 'अनुसुचीत जाती (SC)', female: placeholder, male: placeholder, total: placeholder },
+    { category: 'अनुसुचीत जमाती(ST)', female: placeholder, male: placeholder, total: placeholder },
+    { category: 'इतर मागास वग(OBC)', female: placeholder, male: placeholder, total: placeholder },
+    { category: 'विशेष मागास प्रवर्ग (SBC)', female: placeholder, male: placeholder, total: placeholder },
+    { category: 'भटक्या जमाती -अ (VJ)', female: placeholder, male: placeholder, total: placeholder },
+    { category: 'भटक्या जमाती - ब(NT-B)', female: placeholder, male: placeholder, total: placeholder },
+    { category: 'भटक्या जमाती - क (NT-C)', female: placeholder, male: placeholder, total: placeholder },
+    { category: 'भटक्या जमाती - ड (NT-D)', female: placeholder, male: placeholder, total: placeholder },
+    { category: 'खुला प्रवर्ग(OPEN))', female: placeholder, male: placeholder, total: placeholder },
+    { category: 'एकूण लोकसंख्या', female: placeholder, male: placeholder, total: placeholder },
+  ];
+
+  const villageStats = [
+    { category: 'महिला', female: placeholder, male: placeholder, total: placeholder },
+    { category: 'पुरुष', female: placeholder, male: placeholder, total: placeholder },
+    { category: 'एकूण', female: placeholder, male: placeholder, total: placeholder },
+  ];
+
+  return (
+    <section className="py-16 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto space-y-12">
+          {/* गावातील लोकसंख्या */}
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800">
+              गावाची लोकसंख्या
+            </h2>
+            <h3 className="text-xl md:text-2xl text-center mb-8 text-gray-700">
+              आमच्या गावातील पुरुष, स्त्रिया व एकूण लोकसंख्या माहिती
+            </h3>
+            <p className="text-center text-sm text-gray-500 mb-4">
+              ही माहिती लवकरच अद्ययावत केली जाईल.
+            </p>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full bg-white rounded-lg shadow-md overflow-hidden">
+                <thead className="bg-blue-600 text-white">
+                  <tr>
+                    <th className="px-4 py-3 text-left">महिला</th>
+                    <th className="px-4 py-3 text-left">पुरुष</th>
+                    <th className="px-4 py-3 text-left">एकूण</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {villageStats.map((stat, index) => (
+                    <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                      <td className="px-4 py-3">{stat.female || '-'}</td>
+                      <td className="px-4 py-3">{stat.male || '-'}</td>
+                      <td className="px-4 py-3 font-semibold">{stat.total || '-'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* गावातील जातीनुसार मतदार संघ */}
+          <div>
+            <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 text-gray-800">
+              गावातील जातीनुसार मतदार संघ
+            </h3>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full bg-white rounded-lg shadow-md overflow-hidden">
+                <thead className="bg-blue-600 text-white">
+                  <tr>
+                    <th className="px-4 py-3 text-left">जात / समाज</th>
+                    <th className="px-4 py-3 text-left">महिला</th>
+                    <th className="px-4 py-3 text-left">पुरुष</th>
+                    <th className="px-4 py-3 text-left">एकूण</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {casteStats.map((stat, index) => (
+                    <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                      <td className="px-4 py-3 font-medium">{stat.category}</td>
+                      <td className="px-4 py-3">{stat.female || '-'}</td>
+                      <td className="px-4 py-3">{stat.male || '-'}</td>
+                      <td className="px-4 py-3 font-semibold">{stat.total || '-'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default PopulationStats;
+
