@@ -87,7 +87,7 @@ const Footer = () => {
                 </a>
               </li>
               <li className="text-gray-300">
-                At/Post-XXXXXXXX तालुका-चांदवड जिल्हा-नाशिक
+                At/Post-राजदेरवाडी तालुका-चांदवड जिल्हा-नाशिक
               </li>
               <li className="flex gap-4 mt-4">
                 <a href="#" className="hover:text-blue-400 transition" aria-label="Facebook">
@@ -115,7 +115,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="border-t border-gray-700 pt-8 mt-8 text-center text-gray-400">
-          <p>Copyright © 2025 XXXXXXXXXXX Gram Panchayat. All Rights Reserved</p>
+          <p>Copyright © 2025 Rajderwadi Gram Panchayat. All Rights Reserved</p>
         </div>
       </div>
     </footer>

@@ -1,6 +1,7 @@
 import { useHomeData } from '../hooks/useHomeData';
 import kakaImage from '../images/kaka.jpg'; // Fallback image
-
+import sarpanchImage from '../images/sarpanch.jpeg';
+import gavImage from '../images/upsarpanch.jpeg';
 const Leadership = () => {
   const { data, loading } = useHomeData();
   const language = 'mr'; // Default to Marathi
@@ -14,26 +15,60 @@ const Leadership = () => {
     return 'https://grampanchayat-website-project-code.onrender.com/api';
   };
   // Helper to get full image URL
-  const getImageUrl = (imageUrl) => {
-    if (!imageUrl) return kakaImage;
-    if (imageUrl.startsWith('http')) return imageUrl;
-    
-    // API returns URLs like "/api/images/..." 
-    // VITE_API_BASE_URL is "http://localhost:5000/api"
-    // So we need to remove /api from base URL if URL already starts with /api
-    const baseUrl = getApiBaseUrl();
-    if (imageUrl.startsWith('/api')) {
-      // Remove /api from base URL to avoid double /api
-      const baseWithoutApi = baseUrl.replace(/\/api$/, '');
-      return `${baseWithoutApi}${imageUrl}`;
+  // Safe helper to resolve image sources.
+  // - If `imageUrl` is falsy, returns the `fallback` image (defaults to `kakaImage`).
+  // - If it looks like an absolute URL (http:// or https://) or a data URL, return as-is.
+  // - If it starts with a single slash ("/"), treat it as an absolute path already usable by the browser.
+  // - If it starts with "/api", append it to the API host (for backend-served files).
+  // - If it's an imported asset (string path or module with .default), return it.
+  const getImageUrl = (imageUrl, fallback = kakaImage) => {
+    if (!imageUrl) return fallback;
+
+    // If the import produced an object (some bundlers), use .default
+    if (typeof imageUrl === 'object' && imageUrl?.default) return imageUrl.default;
+
+    // If it's not a string (unexpected), fallback
+    if (typeof imageUrl !== 'string') return fallback;
+
+    // Absolute URLs and data URLs
+    if (/^https?:\/\//i.test(imageUrl) || /^data:/i.test(imageUrl)) return imageUrl;
+
+    // If it's an absolute path (starts with /) we assume it's usable in the browser
+    if (imageUrl.startsWith('/')) {
+      // Backend paths may start with /api - construct a full URL for those.
+      if (imageUrl.startsWith('/api')) {
+        const baseUrl = getApiBaseUrl();
+        const baseWithoutApi = baseUrl.replace(/\/api$/, '');
+        return `${baseWithoutApi}${imageUrl}`;
+      }
+      return imageUrl;
     }
-    return `${baseUrl}${imageUrl}`;
+
+    // If it's a relative backend path (unlikely), try the API base
+    const baseUrl = getApiBaseUrl();
+    return `${baseUrl}/${imageUrl}`;
   };
 
   // Get leadership data from API
   const leadershipData = data?.leadership;
   const sarpanch = leadershipData?.sarpanch;
   const teamMembers = leadershipData?.teamMembers || [];
+
+  // Default / fallback entries when backend doesn't provide team members
+  const defaultUpsarpanch = {
+    id: 'upsarpanch-default',
+    image: gavImage,
+    name: { mr: 'सौ.मोहिनी मनोज शिंदे' },
+    role: { mr: 'उपसरपंच' },
+    village: { mr: 'राजदेरवाडी' },
+  };
+
+  // If teamMembers is empty, show a sensible default set (upsarpanch + placeholders)
+  const displayedTeamMembers = teamMembers.length > 0 ? teamMembers : [
+    defaultUpsarpanch,
+    { id: 'placeholder-2', image: kakaImage, name: { mr: 'संपूर्ण नाव' }, role: { mr: 'ग्राम सचिव' } },
+    { id: 'placeholder-3', image: kakaImage, name: { mr: 'संपूर्ण नाव' }, role: { mr: 'सदस्य' } },
+  ];
 
   return (
     <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
@@ -67,7 +102,8 @@ const Leadership = () => {
                     <div className="bg-white rounded-lg p-4">
                       <div className="mb-6 overflow-hidden rounded-lg shadow-md">
                           <img 
-                            src={getImageUrl(sarpanch?.image)} 
+                            // Prefer backend image but fall back to local import if backend value missing
+                            src={getImageUrl(sarpanch?.image, sarpanchImage)} 
                             alt={sarpanch?.role?.[language] || sarpanch?.role?.mr || 'सरपंच'} 
                             className="w-full h-[400px] object-cover object-center hover:scale-105 transition-transform duration-500"
                             loading="lazy"
@@ -76,7 +112,7 @@ const Leadership = () => {
                       </div>
                       <div className="text-center space-y-2">
                         <h3 className="text-2xl md:text-3xl font-bold text-blue-800 mb-2">
-                          {sarpanch?.name?.[language] || sarpanch?.name?.mr || 'संपूर्ण नाव'}
+                          {sarpanch?.name?.[language] || sarpanch?.name?.mr || 'सिद्धार्थ वाळूबा यशवंते'}
                         </h3>
                         <div className="inline-block px-4 py-1 bg-teal-100 rounded-full mb-2">
                           <p className="text-lg font-semibold text-teal-800">
@@ -94,19 +130,37 @@ const Leadership = () => {
                 </div>
 
                 {/* Right Column - Leadership Description Block */}
-                <div className="bg-gradient-to-br from-teal-700 to-teal-900 rounded-xl shadow-xl p-8 md:p-10 flex items-center border border-teal-800">
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-1 h-12 bg-white rounded-full"></div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-white">आमचे नेतृत्व</h3>
+                <div className="relative overflow-hidden rounded-2xl shadow-2xl border border-teal-600 bg-gradient-to-br from-teal-700 via-cyan-700 to-slate-900 p-8 md:p-10 flex items-center">
+                  <div className="absolute inset-0 opacity-40 pointer-events-none">
+                    <div className="absolute -top-16 -right-8 w-48 h-48 bg-teal-400 rounded-full blur-3xl"></div>
+                    <div className="absolute -bottom-12 -left-10 w-56 h-56 bg-cyan-500 rounded-full blur-3xl"></div>
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.15),_transparent_55%)]"></div>
+                  </div>
+                  <div className="relative z-10 space-y-6">
+                    <div className="flex items-center gap-3">
+                      <div className="w-1 h-12 bg-white/90 rounded-full"></div>
+                      <div>
+                        <p className="uppercase tracking-[0.3em] text-teal-100 text-xs md:text-sm">vision</p>
+                        <h3 className="text-2xl md:text-3xl font-extrabold text-white">आमचे नेतृत्व</h3>
+                      </div>
                     </div>
-                    <p className="text-white text-lg md:text-xl leading-relaxed text-left">
+                    <p className="text-white/90 text-lg md:text-xl leading-relaxed text-left">
                       {sarpanch?.description?.[language] || sarpanch?.description?.mr || 'गावाच्या सर्वांगीण विकासासाठी, शेतकऱ्यांच्या प्रगतीसाठी, महिला बालकांच्या कल्याणासाठी तसेच सामाजिक ऐक्य राखण्यासाठी आमचे सरपंच नेहमीच पुढाकार घेतात. ग्रामस्थांच्या सक्रिय सहभागाने, पंचायत प्रगती आणि एकतेसाठी काम करते.'}
                     </p>
-                    <div className="pt-4 flex items-center gap-2">
-                      <div className="w-8 h-0.5 bg-white"></div>
-                      <div className="w-2 h-2 bg-white rounded-full"></div>
-                      <div className="w-16 h-0.5 bg-white"></div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-white/80 text-sm">
+                      <div className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 backdrop-blur-sm">
+                        <span className="w-2 h-2 bg-emerald-300 rounded-full"></span>
+                        <p className="font-medium">पारदर्शक प्रशासन</p>
+                      </div>
+                      <div className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 backdrop-blur-sm">
+                        <span className="w-2 h-2 bg-cyan-300 rounded-full"></span>
+                        <p className="font-medium">ग्रामस्थांचा सहभाग</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 pt-2 text-white/70 text-sm uppercase tracking-widest">
+                      <div className="w-8 h-0.5 bg-white/60"></div>
+                      <span>development</span>
+                      <div className="w-16 h-0.5 bg-white/60"></div>
                     </div>
                   </div>
                 </div>
@@ -115,15 +169,15 @@ const Leadership = () => {
               {/* Team Members Section - Three Cards */}
               <div className="mt-24 md:mt-32">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                  {teamMembers.length > 0 ? (
-                    teamMembers.map((member) => (
+                  {displayedTeamMembers.length > 0 ? (
+                    displayedTeamMembers.map((member) => (
                       <div 
                         key={member.id}
                         className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
                       >
                         <div className="overflow-hidden">
                           <img 
-                            src={getImageUrl(member.image)} 
+                            src={getImageUrl(member.image, kakaImage)} 
                             alt={member.role?.[language] || member.role?.mr || 'सदस्य'} 
                             className="w-full h-[350px] object-cover object-center hover:scale-110 transition-transform duration-500"
                             loading="lazy"
@@ -147,34 +201,7 @@ const Leadership = () => {
                         </div>
                       </div>
                     ))
-                  ) : (
-                    // Show 3 default placeholder cards when no team members
-                    [1, 2, 3].map((index) => (
-                      <div 
-                        key={`placeholder-${index}`}
-                        className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
-                      >
-                        <div className="overflow-hidden">
-                          <img 
-                            src={kakaImage} 
-                            alt="सदस्य" 
-                            className="w-full h-[350px] object-cover object-center hover:scale-110 transition-transform duration-500"
-                            loading="lazy"
-                          />
-                        </div>
-                        <div className="p-6 text-center space-y-2">
-                          <h3 className="text-xl md:text-2xl font-bold text-blue-800 mb-2">
-                            संपूर्ण नाव
-                          </h3>
-                          <div className="inline-block px-3 py-1 bg-teal-100 rounded-full mb-1">
-                            <p className="text-base font-semibold text-teal-800">
-                              {index === 1 ? 'उपसरपंच' : index === 2 ? 'ग्राम पंचायत अधिकारी' : 'सदस्य'}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                  )}
+                  ) : null}
                 </div>
               </div>
             </>

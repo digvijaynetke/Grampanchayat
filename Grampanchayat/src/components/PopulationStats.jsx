@@ -1,27 +1,29 @@
 const PopulationStats = () => {
+  const placeholderValue = '-';
+
   const genderStats = [
-    { category: 'महिला', female: 926, male: 0, total: 926 },
-    { category: 'पुरुष', female: 0, male: 891, total: 891 },
-    { category: 'एकूण लोकसंख्या', female: 926, male: 891, total: 1853 },
+    { category: 'महिला', female: placeholderValue, male: placeholderValue, total: placeholderValue },
+    { category: 'पुरुष', female: placeholderValue, male: placeholderValue, total: placeholderValue },
+    { category: 'एकूण लोकसंख्या', female: placeholderValue, male: placeholderValue, total: placeholderValue },
   ];
 
   const casteStats = [
-    { category: 'अनुसुचीत जाती (SC)', female: 68, male: 72, total: 140 },
-    { category: 'अनुसुचीत जमाती(ST)', female: 16, male: 12, total: 28 },
-    { category: 'इतर मागास वग(OBC)', female: 55, male: 78, total: 133 },
-    { category: 'विशेष मागास प्रवर्ग (SBC)', female: 90, male: 66, total: 150 },
-    { category: 'भटक्या जमाती -अ (VJ)', female: 110, male: 120, total: 230 },
-    { category: 'भटक्या जमाती - ब(NT-B)', female: 95, male: 72, total: 162 },
-    { category: 'भटक्या जमाती - क (NT-C)', female: 88, male: 100, total: 188 },
-    { category: 'भटक्या जमाती - ड (NT-D)', female: 65, male: 80, total: 145 },
-    { category: 'खुला प्रवर्ग(OPEN))', female: 92, male: 75, total: 167 },
-    { category: 'एकूण लोकसंख्या', female: 679, male: 665, total: 1344 },
+    { category: 'अनुसुचीत जाती (SC)', female: placeholderValue, male: placeholderValue, total: placeholderValue },
+    { category: 'अनुसुचीत जमाती(ST)', female: placeholderValue, male: placeholderValue, total: placeholderValue },
+    { category: 'इतर मागास वग(OBC)', female: placeholderValue, male: placeholderValue, total: placeholderValue },
+    { category: 'विशेष मागास प्रवर्ग (SBC)', female: placeholderValue, male: placeholderValue, total: placeholderValue },
+    { category: 'भटक्या जमाती -अ (VJ)', female: placeholderValue, male: placeholderValue, total: placeholderValue },
+    { category: 'भटक्या जमाती - ब(NT-B)', female: placeholderValue, male: placeholderValue, total: placeholderValue },
+    { category: 'भटक्या जमाती - क (NT-C)', female: placeholderValue, male: placeholderValue, total: placeholderValue },
+    { category: 'भटक्या जमाती - ड (NT-D)', female: placeholderValue, male: placeholderValue, total: placeholderValue },
+    { category: 'खुला प्रवर्ग(OPEN))', female: placeholderValue, male: placeholderValue, total: placeholderValue },
+    { category: 'एकूण लोकसंख्या', female: placeholderValue, male: placeholderValue, total: placeholderValue },
   ];
 
   const villageStats = [
-    { category: 'महिला', female: 579, male: 0, total: 579 },
-    { category: 'पुरुष', female: 0, male: 590, total: 590 },
-    { category: 'एकूण', female: 579, male: 590, total: 1169 },
+    { category: 'महिला', female: placeholderValue, male: placeholderValue, total: placeholderValue },
+    { category: 'पुरुष', female: placeholderValue, male: placeholderValue, total: placeholderValue },
+    { category: 'एकूण', female: placeholderValue, male: placeholderValue, total: placeholderValue },
   ];
 
   return (
@@ -57,6 +59,9 @@ const PopulationStats = () => {
                 </tbody>
               </table>
             </div>
+            <p className="text-center text-gray-600 mt-4">
+              ही माहिती लवकरच अद्ययावत केली जाईल.
+            </p>
           </div>
 
           {/* गावातील जातीनुसार मतदार संघ */}
@@ -87,6 +92,9 @@ const PopulationStats = () => {
                 </tbody>
               </table>
             </div>
+            <p className="text-center text-gray-600 mt-4">
+              ही माहिती लवकरच अद्ययावत केली जाईल.
+            </p>
           </div>
         </div>
       </div>

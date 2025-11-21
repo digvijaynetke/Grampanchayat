@@ -9,7 +9,7 @@ const News = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
       date: '24 Sep 2025',
       category: 'न्युज/अपडेट्स',
-      village: 'XXXXXXXXX '
+      village: 'राजदेरवाडी '
     },
     {
       id: 2,
@@ -18,7 +18,7 @@ const News = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
       date: '22 Sep 2025',
       category: 'न्युज/अपडेट्स',
-      village: 'XXXXXXXXX '
+      village: 'राजदेरवाडी '
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ const News = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
       date: '22 Sep 2025',
       category: 'न्युज/अपडेट्स',
-      village: 'XXXXXXXXX '
+      village: 'राजदेरवाडी '
     }
   ];
 

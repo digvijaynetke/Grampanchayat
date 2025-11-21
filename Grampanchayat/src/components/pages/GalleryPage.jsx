@@ -3,17 +3,19 @@ import mandirImage from '../../images/mandir.jpg';
 import infoImage from '../../images/info.jpg';
 import gavImage from '../../images/gav.jpg';
 import kakaImage from '../../images/kaka.jpg';
+import sarpanchaImage from '../../images/sarpanch.jpeg';
+import upsarpanchaImage from '../../images/upsarpanch.jpeg';
 
 const GalleryPage = () => {
   const images = [
     { id: 1, src: mandirImage, alt: 'Gallery Image 1' },
     { id: 2, src: infoImage, alt: 'Gallery Image 2' },
     { id: 3, src: gavImage, alt: 'Gallery Image 3' },
-    { id: 4, src: kakaImage, alt: 'Gallery Image 4' },
+    { id: 4, src: sarpanchaImage, alt: 'Gallery Image 4' },
     { id: 5, src: mandirImage, alt: 'Gallery Image 5' },
     { id: 6, src: infoImage, alt: 'Gallery Image 6' },
     { id: 7, src: gavImage, alt: 'Gallery Image 7' },
-    { id: 8, src: kakaImage, alt: 'Gallery Image 8' },
+    { id: 8, src: upsarpanchaImage, alt: 'Gallery Image 8' },
     { id: 9, src: mandirImage, alt: 'Gallery Image 9' },
   ];
 
