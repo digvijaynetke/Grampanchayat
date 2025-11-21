@@ -87,7 +87,7 @@ const Footer = () => {
                 </a>
               </li>
               <li className="text-gray-300">
-                At/Post-XXXXXXXX तालुका-चांदवड जिल्हा-नाशिक
+                At/Post-वडनेर भैरव तालुका-चांदवड जिल्हा-नाशिक
               </li>
               <li className="flex gap-4 mt-4">
                 <a href="#" className="hover:text-blue-400 transition" aria-label="Facebook">
@@ -115,9 +115,42 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="border-t border-gray-700 pt-8 mt-8 text-center text-gray-400">
-          <p>Copyright © 2025 XXXXXXXXXXX Gram Panchayat. All Rights Reserved</p>
+          <p>
+            Copyright © 2025{' '}
+            <span className="highlight-animated" aria-hidden="false" aria-label="वडनेर भैरव ग्रामपंचायत">
+              वडनेर भैरव ग्रामपंचायत
+            </span>
+            . All Rights Reserved
+          </p>
         </div>
       </div>
+      {/* Inline styles for the animated highlight. Keeps font-size inherited so text size doesn't change. */}
+      <style>{`
+        .highlight-animated {
+          display: inline-block;
+          padding: 0 0.25rem;
+          border-radius: 0.25rem;
+          background: linear-gradient(90deg, rgba(255,243,205,0.95) 0%, rgba(255,232,179,0.95) 50%, rgba(255,243,205,0.95) 100%);
+          color: inherit; /* keep same text color / sizing */
+          transition: box-shadow .25s ease, transform .15s ease;
+          animation: highlight-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes highlight-pulse {
+          0% { transform: translateY(0); box-shadow: 0 0 0 rgba(255,193,7,0); }
+          50% { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,193,7,0.12); }
+          100% { transform: translateY(0); box-shadow: 0 0 0 rgba(255,193,7,0); }
+        }
+
+        /* Respect users who prefer reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+          .highlight-animated {
+            animation: none;
+            transform: none;
+            box-shadow: none;
+          }
+        }
+      `}</style>
     </footer>
   );
 };

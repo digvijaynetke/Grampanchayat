@@ -38,7 +38,7 @@ const Navigation = ({ onOpenComplaint }) => {
             <img src={logo} alt="logo" className="w-12 h-12 object-cover rounded-full shadow-md" />
             <div className="text-left">
               <div className="text-lg md:text-xl font-bold text-gray-800">
-                XXXXXXXX ग्रामपंचायत
+                 वडनेर भैरव  ग्रामपंचायत
               </div>
               <div className="text-sm md:text-sm text-gray-600">
                 पंचायत समिती चांदवड, तालुका चांदवड, जि.नाशिक

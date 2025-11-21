@@ -12,7 +12,7 @@ const Awards = () => {
       description: 'गाव स्वच्छ ठेवण्यावर भर, घनकचरा व्यवस्थापन युनिट, दैनंदिन  कचरा संकलन साठी घंटागाडी ',
       date: 'date month year',
       category: 'पुरस्कार / यशोगाथा',
-      village: 'XXXXXXXX '
+      village: 'वडनेर भैरव '
     },
     {
       id: 2,
@@ -21,7 +21,7 @@ const Awards = () => {
       description: 'महाजल अंतर्गत ६.५०लक्ष लिटर जल कुंभ, जल जीवन मिशन अंतर्गत २.५० लक्ष लिटर जल कुंभ, नियमित आणि शुद्ध पाणीपुरवठा,नागरिकांचे आरोग्य लक्षात घेऊन शुध्द जल आरो प्लांट.',
       date: 'date month year',
       category: 'पुरस्कार / यशोगाथा',
-      village: 'XXXXXXXX '
+      village: 'वडनेर भैरव '
     },
     {
       id: 3,
@@ -30,7 +30,7 @@ const Awards = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
       date: '22 Sep 2025',
       category: 'पुरस्कार / यशोगाथा',
-      village: 'XXXXXXXX '
+      village: 'वडनेर भैरव '
     }
   ];
 

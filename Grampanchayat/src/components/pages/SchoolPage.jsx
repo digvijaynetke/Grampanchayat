@@ -10,7 +10,7 @@ const SchoolPage = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल..',
       level: 'प्राथमिक आणि माध्यमिक',
       students: '200+',
-      location: 'XXXXXXXXX '
+      location: ' वडनेर भैरव  '
     },
     {
       id: 2,
@@ -18,7 +18,7 @@ const SchoolPage = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल..',
       level: 'माध्यमिक',
       students: '150+',
-      location: 'XXXXXXXXX '
+      location: ' वडनेर भैरव  '
     },
     {
       id: 3,
@@ -26,7 +26,7 @@ const SchoolPage = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल..',
       level: 'प्राथमिक',
       students: '100+',
-      location: 'XXXXXXXXX '
+      location: ' वडनेर भैरव  '
     }
   ];
 
