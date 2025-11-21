@@ -1,5 +1,11 @@
 import { useHomeData } from '../hooks/useHomeData';
-import kakaImage from '../images/kaka.jpg'; // Fallback image
+import kakaImage from '../images/dummy.jpg'; // Fallback image for sarpanch
+import upsarpanchImg from '../images/upsarpanch.jpeg';
+import gramsevakImg from '../images/gramsevak.jpeg';
+import sabhasad1Img from '../images/sabhasad1.jpeg';
+import sabhasad2Img from '../images/sabhasad2.jpeg';
+import gramvikassadhsayImg from '../images/gramvikassadhsay.jpg';
+import sadhshya3Img from '../images/sadhshya3.jpg';
 
 const Leadership = () => {
   const { data, loading } = useHomeData();
@@ -16,24 +22,121 @@ const Leadership = () => {
   // Helper to get full image URL
   const getImageUrl = (imageUrl) => {
     if (!imageUrl) return kakaImage;
-    if (imageUrl.startsWith('http')) return imageUrl;
-    
-    // API returns URLs like "/api/images/..." 
-    // VITE_API_BASE_URL is "http://localhost:5000/api"
-    // So we need to remove /api from base URL if URL already starts with /api
+
+    // Already absolute (backend served full URL or base64/blob)
+    if (
+      imageUrl.startsWith('http') ||
+      imageUrl.startsWith('data:') ||
+      imageUrl.startsWith('blob:')
+    ) {
+      return imageUrl;
+    }
+
+    // Static assets imported via Vite already resolve to /src/... (dev) or /assets/... (build).
+    if (
+      imageUrl.startsWith('/src/') ||
+      imageUrl.startsWith('/assets/') ||
+      imageUrl.startsWith('/images/')
+    ) {
+      return imageUrl;
+    }
+
     const baseUrl = getApiBaseUrl();
+
+    // API returns URLs like "/api/images/...".
     if (imageUrl.startsWith('/api')) {
-      // Remove /api from base URL to avoid double /api
       const baseWithoutApi = baseUrl.replace(/\/api$/, '');
       return `${baseWithoutApi}${imageUrl}`;
     }
-    return `${baseUrl}${imageUrl}`;
+
+    // Relative path coming from backend e.g. "images/.." – prefix the API base.
+    if (!imageUrl.startsWith('/')) {
+      return `${baseUrl}/${imageUrl}`.replace(/([^:]\/+)\/+/g, '$1/');
+    }
+
+    // Any other root-relative path can be returned as-is (served by frontend origin).
+    return imageUrl;
   };
 
   // Get leadership data from API
   const leadershipData = data?.leadership;
   const sarpanch = leadershipData?.sarpanch;
   const teamMembers = leadershipData?.teamMembers || [];
+
+  // Default entries (static) - will be merged with backend data.
+  const defaultTeam = [
+    {
+      id: 'upsarpanch',
+      image: upsarpanchImg,
+      name: { mr: 'दिपक आत्माराम घुमरे' },
+      role: { mr: 'उपसरपंच' },
+    },
+    {
+      id: 'gramsevak',
+      image: gramsevakImg,
+      name: { mr: 'श्रीमती शुभांगी गोरख सुरसे' },
+      role: { mr: 'ग्रामपंचायत अधिकारी' },
+    },
+    {
+      id: 'sabhasad1',
+      image: sabhasad1Img,
+      name: { mr: 'लताबाई बाळकृष्ण गांगुर्डे' },
+      role: { mr: 'ग्रा प सदस्य' },
+    },
+    {
+      id: 'sabhasad2',
+      image: sabhasad2Img,
+      name: { mr: 'नंदकुमार माधवराव चौधरी' },
+      role: { mr: 'ग्रा प सदस्य' },
+    },
+    {
+      id: 'gramvikassadhsay',
+      image: gramvikassadhsayImg,
+      name: { mr: 'श्री छगन शंकर घोलप' },
+      role: { mr: 'ग्रा व सदस्य' },
+    },
+    {
+      id: 'sadhshya3',
+      image: sadhshya3Img,
+      name: { mr: 'सुनीता सचिन सोनवणे' },
+      role: { mr: 'ग्रा प सदस्य' },
+    }
+  ];
+
+  // Merge backend teamMembers with defaults. Backend data wins, defaults fill missing fields.
+  const mergedTeam = (() => {
+    const map = new Map();
+    (teamMembers || []).forEach((m) => {
+      const key = m.id || (m.name && (m.name.mr || Object.values(m.name)[0])) || Math.random().toString(36).slice(2);
+      map.set(key, { ...m });
+    });
+    defaultTeam.forEach((def) => {
+      const existing = map.get(def.id);
+      if (existing) {
+        if (!existing.image) existing.image = def.image;
+        if (!existing.name) existing.name = def.name;
+        if (!existing.role) existing.role = def.role;
+      } else {
+        map.set(def.id, def);
+      }
+    });
+    return Array.from(map.values());
+  })();
+
+  // Ensure sarpanch always has an image - prefer backend but fallback to kakaImage
+  let displaySarpanch = sarpanch ? { ...sarpanch } : null;
+  if (displaySarpanch) {
+    if (!displaySarpanch.image) displaySarpanch.image = kakaImage;
+  } else {
+    // If no sarpanch from backend, show a simple placeholder with kakaImage
+    displaySarpanch = {
+      id: 'sarpanch',
+      image: kakaImage,
+      name: { mr: 'संपूर्ण नाव' },
+      role: { mr: 'सरपंच' },
+      description: { mr: '' }
+    };
+  }
 
   return (
     <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
@@ -62,30 +165,30 @@ const Leadership = () => {
               {/* Two Column Layout */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
                 {/* Left Column - Sarpanch Card */}
-                <div className="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-shadow duration-300">
+                <div className="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100 group hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
                   <div className="p-2 bg-gradient-to-br from-teal-50 to-blue-50">
                     <div className="bg-white rounded-lg p-4">
-                      <div className="mb-6 overflow-hidden rounded-lg shadow-md">
+                      <div className="mb-6 overflow-hidden rounded-lg shadow-md bg-gray-50 flex items-center justify-center h-[420px] p-4">
                           <img 
-                            src={getImageUrl(sarpanch?.image)} 
-                            alt={sarpanch?.role?.[language] || sarpanch?.role?.mr || 'सरपंच'} 
-                            className="w-full h-[400px] object-cover object-center hover:scale-105 transition-transform duration-500"
+                            src={getImageUrl(displaySarpanch?.image)} 
+                            alt={displaySarpanch?.role?.[language] || displaySarpanch?.role?.mr || 'सरपंच'} 
+                            className="max-h-full w-auto object-contain transition-transform duration-500 group-hover:scale-105"
                             loading="lazy"
                             style={{ imageRendering: 'auto' }}
                           />
                       </div>
                       <div className="text-center space-y-2">
                         <h3 className="text-2xl md:text-3xl font-bold text-blue-800 mb-2">
-                          {sarpanch?.name?.[language] || sarpanch?.name?.mr || 'संपूर्ण नाव'}
+                          {displaySarpanch?.name?.[language] || displaySarpanch?.name?.mr || 'संपूर्ण नाव'}
                         </h3>
                         <div className="inline-block px-4 py-1 bg-teal-100 rounded-full mb-2">
                           <p className="text-lg font-semibold text-teal-800">
-                            {sarpanch?.role?.[language] || sarpanch?.role?.mr || 'सरपंच'}
+                            {displaySarpanch?.role?.[language] || displaySarpanch?.role?.mr || 'सरपंच'}
                           </p>
                         </div>
-                        {sarpanch?.village && (
+                        {displaySarpanch?.village && (
                           <p className="text-base text-gray-600 font-medium">
-                            {sarpanch.village?.[language] || sarpanch.village?.mr || ''}
+                            {displaySarpanch.village?.[language] || displaySarpanch.village?.mr || ''}
                           </p>
                         )}
                       </div>
@@ -113,19 +216,19 @@ const Leadership = () => {
               </div>
 
               {/* Team Members Section - Three Cards */}
-              <div className="mt-24 md:mt-32">
+                  <div className="mt-24 md:mt-32">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                  {teamMembers.length > 0 ? (
-                    teamMembers.map((member) => (
+                  {mergedTeam.length > 0 ? (
+                    mergedTeam.map((member) => (
                       <div 
-                        key={member.id}
-                        className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                        key={member.id || (member.name && member.name.mr) || Math.random()}
+                        className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 group hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
                       >
-                        <div className="overflow-hidden">
+                        <div className="overflow-hidden bg-gray-50 flex items-center justify-center h-[320px] p-4">
                           <img 
                             src={getImageUrl(member.image)} 
                             alt={member.role?.[language] || member.role?.mr || 'सदस्य'} 
-                            className="w-full h-[350px] object-cover object-center hover:scale-110 transition-transform duration-500"
+                            className="max-h-full w-auto object-contain transition-transform duration-500 group-hover:scale-105"
                             loading="lazy"
                             style={{ imageRendering: 'auto' }}
                           />
@@ -148,17 +251,17 @@ const Leadership = () => {
                       </div>
                     ))
                   ) : (
-                    // Show 3 default placeholder cards when no team members
+                    // Fallback: show 3 default placeholder cards when mergedTeam somehow empty
                     [1, 2, 3].map((index) => (
                       <div 
                         key={`placeholder-${index}`}
-                        className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                        className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 group hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
                       >
-                        <div className="overflow-hidden">
+                        <div className="overflow-hidden bg-gray-50 flex items-center justify-center h-[320px] p-4">
                           <img 
                             src={kakaImage} 
                             alt="सदस्य" 
-                            className="w-full h-[350px] object-cover object-center hover:scale-110 transition-transform duration-500"
+                            className="max-h-full w-auto object-contain transition-transform duration-500 group-hover:scale-105"
                             loading="lazy"
                           />
                         </div>

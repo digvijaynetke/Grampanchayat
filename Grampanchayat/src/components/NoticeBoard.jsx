@@ -9,7 +9,7 @@ const NoticeBoard = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
       date: '22 Sep 2025',
       category: 'सूचना फलक',
-      village: 'वडनेर भैरव'
+      village: 'निंबाळे '
     },
     {
       id: 2,
@@ -18,7 +18,7 @@ const NoticeBoard = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
       date: '22 Sep 2025',
       category: 'सूचना फलक',
-      village: 'वडनेर भैरव'
+      village: 'निंबाळे '
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ const NoticeBoard = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
       date: '22 Sep 2025',
       category: 'सूचना फलक',
-      village: 'वडनेर भैरव'
+      village: 'निंबाळे '
     }
   ];
 

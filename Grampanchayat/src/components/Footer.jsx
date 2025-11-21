@@ -21,7 +21,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Village Info */}
           <div>
-            <h3 className="text-xl font-bold mb-4">वडाळीभोई ग्रामपंचायत</h3>
+            <h3 className="text-xl font-bold mb-4">निंबाळे  ग्रामपंचायत</h3>
             <p className="text-gray-300 mb-4">
               एक समृद्ध व शांत गाव, जिथे शेती, परंपरा आणि एकतेला महत्त्व दिले जाते.
             </p>
@@ -87,7 +87,7 @@ const Footer = () => {
                 </a>
               </li>
               <li className="text-gray-300">
-                At/Post-XXXXXXXX तालुका-चांदवड जिल्हा-नाशिक
+                At/Post-निंबाळे  तालुका-चांदवड जिल्हा-नाशिक
               </li>
               <li className="flex gap-4 mt-4">
                 <a href="#" className="hover:text-blue-400 transition" aria-label="Facebook">
@@ -115,7 +115,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="border-t border-gray-700 pt-8 mt-8 text-center text-gray-400">
-          <p>Copyright © 2025 XXXXXXXXXXX Gram Panchayat. All Rights Reserved</p>
+          <p>Copyright © 2025 निंबाळे ग्रामपंचायत. All Rights Reserved</p>
         </div>
       </div>
     </footer>

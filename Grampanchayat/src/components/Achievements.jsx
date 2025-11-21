@@ -2,17 +2,17 @@ const Achievements = () => {
   const stats = [
     {
       id: 1,
-      value: '76%',
+      value: '--%',
       label: 'साक्षरता दर'
     },
     {
       id: 2,
-      value: '500+',
+      value: '--',
       label: 'हेक्टर जमीन'
     },
     {
       id: 3,
-      value: '6+',
+      value: '--+',
       label: 'शिक्षण केंद्र'
     },
     {

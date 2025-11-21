@@ -8,29 +8,29 @@ const Awards = () => {
        {
       id: 1,
       image: awardImage1,
-      title: 'स्वच्छता',
+      title: 'नमुना पुरस्कार 1-स्वच्छता',
       description: 'गाव स्वच्छ ठेवण्यावर भर, घनकचरा व्यवस्थापन युनिट, दैनंदिन  कचरा संकलन साठी घंटागाडी ',
       date: 'date month year',
       category: 'पुरस्कार / यशोगाथा',
-      village: 'XXXXXXXX '
+      village: 'निंबाळे  '
     },
     {
       id: 2,
       image: awardImage2,
-      title: 'पाणीपुरवठा',
+      title: 'नमुना पुरस्कार 2-पाणीपुरवठा',
       description: 'महाजल अंतर्गत ६.५०लक्ष लिटर जल कुंभ, जल जीवन मिशन अंतर्गत २.५० लक्ष लिटर जल कुंभ, नियमित आणि शुद्ध पाणीपुरवठा,नागरिकांचे आरोग्य लक्षात घेऊन शुध्द जल आरो प्लांट.',
       date: 'date month year',
       category: 'पुरस्कार / यशोगाथा',
-      village: 'XXXXXXXX '
+      village: 'निंबाळे  '
     },
     {
       id: 3,
       image: awardImage3,
-      title: 'नमुना पुरस्कार',
+      title: 'नमुना पुरस्कार 3',
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
       date: '22 Sep 2025',
       category: 'पुरस्कार / यशोगाथा',
-      village: 'XXXXXXXX '
+      village: 'निंबाळे  '
     }
   ];
 
