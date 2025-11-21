@@ -1,21 +1,31 @@
 import PageHero from '../PageHero';
-import mandirImage from '../../images/mandir.jpg';
-import infoImage from '../../images/info.jpg';
 import gavImage from '../../images/gav.jpg';
-import kakaImage from '../../images/kaka.jpg';
+
+// Eagerly import every image inside src/images (and nested folders) so the gallery can display all of them automatically.
+const imageModules = import.meta.glob('../../images/**/*.{jpg,jpeg,png,gif,webp}', {
+  eager: true,
+  import: 'default'
+});
+
+const formatAltText = (filePath) => {
+  const fileName = filePath.split('/').pop() || 'gallery image';
+  const label = fileName.replace(/\.[^.]+$/, '') // remove extension
+    .replace(/[-_]+/g, ' ') // replace separators with spaces
+    .trim();
+  return label.length ? label.charAt(0).toUpperCase() + label.slice(1) : 'Gallery image';
+};
+
+const galleryImages = Object.entries(imageModules)
+  .sort(([aPath], [bPath]) => aPath.localeCompare(bPath))
+  .map(([path, src], index) => ({
+    id: index + 1,
+    src,
+    alt: formatAltText(path),
+    label: path.replace('../../images/', '')
+  }));
 
 const GalleryPage = () => {
-  const images = [
-    { id: 1, src: mandirImage, alt: 'Gallery Image 1' },
-    { id: 2, src: infoImage, alt: 'Gallery Image 2' },
-    { id: 3, src: gavImage, alt: 'Gallery Image 3' },
-    { id: 4, src: kakaImage, alt: 'Gallery Image 4' },
-    { id: 5, src: mandirImage, alt: 'Gallery Image 5' },
-    { id: 6, src: infoImage, alt: 'Gallery Image 6' },
-    { id: 7, src: gavImage, alt: 'Gallery Image 7' },
-    { id: 8, src: kakaImage, alt: 'Gallery Image 8' },
-    { id: 9, src: mandirImage, alt: 'Gallery Image 9' },
-  ];
+  const images = galleryImages;
 
   return (
     <div>
@@ -41,21 +51,28 @@ const GalleryPage = () => {
           </h2>
 
           {/* Gallery Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {images.map((image) => (
-              <div
-                key={image.id}
-                className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-[300px] object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300"></div>
-              </div>
-            ))}
-          </div>
+          {images.length === 0 ? (
+            <p className="text-center text-gray-500">सध्या कोणत्याही फोटोंची नोंद उपलब्ध नाही.</p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {images.map((image) => (
+                <figure
+                  key={image.id}
+                  className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-2xl transition-all duration-300"
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    loading="lazy"
+                    className="w-full h-[280px] object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent text-white text-sm px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {image.alt}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>
