@@ -1,5 +1,5 @@
 import PageHero from '../PageHero';
-import PopulationStats from '../PopulationStats';
+// import PopulationStats from '../PopulationStats';
 import Achievements from '../Achievements';
 import gavImage from '../../images/gav.jpg';
 
@@ -29,7 +29,7 @@ const VillageInfoPage = () => {
                 
                 <h3 className="text-2xl font-bold text-gray-800 mb-4">स्थान</h3>
                 <p className="text-gray-700 leading-relaxed mb-6">
-                  At/Post-XXXXXXXX, तालुका-चांदवड, जिल्हा-नाशिक
+                  At/Post-उर्धुळ, तालुका-चांदवड, जिल्हा-नाशिक
                 </p>
 
                 <h3 className="text-2xl font-bold text-gray-800 mb-4">मुख्य वैशिष्ट्ये</h3>
@@ -46,7 +46,7 @@ const VillageInfoPage = () => {
         </div>
       </section>
       <Achievements />
-      <PopulationStats />
+      {/* <PopulationStats /> */}
     </div>
   );
 };

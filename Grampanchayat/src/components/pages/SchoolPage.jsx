@@ -10,7 +10,7 @@ const SchoolPage = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल..',
       level: 'प्राथमिक आणि माध्यमिक',
       students: '200+',
-      location: 'XXXXXXXXX '
+      location: 'उर्धूळ '
     },
     {
       id: 2,
@@ -18,7 +18,7 @@ const SchoolPage = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल..',
       level: 'माध्यमिक',
       students: '150+',
-      location: 'XXXXXXXXX '
+      location: 'उर्धूळ '
     },
     {
       id: 3,
@@ -26,8 +26,13 @@ const SchoolPage = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल..',
       level: 'प्राथमिक',
       students: '100+',
-      location: 'XXXXXXXXX '
+      location: 'उर्धूळ '
     }
+  ];
+
+  const additionalContacts = [
+    { name: 'जिल्हा परिषद शाळा', type: 'प्राथमिक', contact: '९७६३२८९०९२' },
+    { name: 'माध्यमिक विद्यालय', type: 'माध्यमिक', contact: '९४२०३६१५५५' }
   ];
 
   return (
@@ -82,6 +87,52 @@ const SchoolPage = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+    </section>
+    <section className="py-12 bg-teal-50">
+      <div className="container mx-auto px-4">
+        <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-md border border-teal-100">
+          <div className="p-6 md:p-8">
+            <h3 className="text-2xl font-bold text-teal-800 mb-4 text-center">
+              अतिरिक्त शाळा संपर्क माहिती
+            </h3>
+            <p className="text-gray-600 text-center mb-6">
+              खालील सूचीमध्ये गावातील महत्त्वाच्या शैक्षणिक संस्थांचे संपर्क तपशील दिलेले आहेत.
+            </p>
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-teal-100 text-teal-900">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-sm font-semibold uppercase tracking-wider">
+                      शाळेचे नाव
+                    </th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold uppercase tracking-wider">
+                      स्तर
+                    </th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold uppercase tracking-wider">
+                      संपर्क क्रमांक
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {additionalContacts.map((contact) => (
+                    <tr key={contact.name} className="hover:bg-teal-50">
+                      <td className="px-4 py-4 text-gray-800 font-medium">
+                        {contact.name}
+                      </td>
+                      <td className="px-4 py-4 text-gray-600">
+                        {contact.type}
+                      </td>
+                      <td className="px-4 py-4 text-teal-700 font-semibold">
+                        {contact.contact}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

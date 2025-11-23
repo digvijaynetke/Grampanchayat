@@ -6,7 +6,7 @@ const AwardsPage = () => {
   return (
     <div>
       <PageHero 
-        title="पुरस्कार / यशोगाथा" 
+        title="विकास कामे" 
         subtitle="माहिती"
         image={infoImage}
       />

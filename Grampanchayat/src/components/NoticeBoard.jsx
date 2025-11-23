@@ -9,7 +9,7 @@ const NoticeBoard = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
       date: '22 Sep 2025',
       category: 'सूचना फलक',
-      village: 'वडनेर भैरव'
+      village: 'उर्धुळ'
     },
     {
       id: 2,
@@ -18,7 +18,7 @@ const NoticeBoard = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
       date: '22 Sep 2025',
       category: 'सूचना फलक',
-      village: 'वडनेर भैरव'
+      village: 'उर्धुळ'
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ const NoticeBoard = () => {
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
       date: '22 Sep 2025',
       category: 'सूचना फलक',
-      village: 'वडनेर भैरव'
+      village: 'उर्धुळ'
     }
   ];
 
@@ -109,6 +109,20 @@ const NoticeBoard = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Important Notice */}
+          <div className="mt-10 bg-yellow-50 border border-yellow-200 rounded-2xl p-6 shadow-inner">
+            <h3 className="text-sm font-medium text-yellow-800 mb-2">
+              महत्वाची सूचना
+            </h3>
+            <div className="text-sm text-yellow-700 space-y-2">
+              <p>गावाच्या विकास आणि पारदर्शकतेसाठी उपयुक्त असलेली ही माहिती वापरताना पुढील गोष्टींचे पालन करणे बंधनकारक आहे:</p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>सर्व माहिती ग्रामपंचायत कार्यालयाकडून तपासून (सत्यापित करून) घेणे आवश्यक आहे.</li>
+                <li>फोटो वापरण्यापूर्वी ग्रामपंचायतची रीतसर परवानगी घ्यावी.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

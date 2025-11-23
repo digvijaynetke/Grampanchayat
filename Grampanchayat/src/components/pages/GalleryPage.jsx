@@ -1,28 +1,37 @@
 import PageHero from '../PageHero';
-import mandirImage from '../../images/mandir.jpg';
-import infoImage from '../../images/info.jpg';
 import gavImage from '../../images/gav.jpg';
-import kakaImage from '../../images/kaka.jpg';
+
+const galleryImageModules = import.meta.glob('../../images/*.{jpg,jpeg,png}', {
+  eager: true,
+  import: 'default'
+});
+
+const galleryImages = Object.entries(galleryImageModules)
+  .map(([path, src], index) => {
+    const fileName = path.split('/').pop() || `image-${index + 1}`;
+    const readableName = fileName
+      .replace(/\.[^.]+$/, '')
+      .replace(/[-_]/g, ' ')
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+
+    return {
+      id: index + 1,
+      src,
+      fileName,
+      alt: `गॅलरी प्रतिमा - ${readableName}`
+    };
+  })
+  .sort((a, b) => a.fileName.localeCompare(b.fileName));
 
 const GalleryPage = () => {
-  const images = [
-    { id: 1, src: mandirImage, alt: 'Gallery Image 1' },
-    { id: 2, src: infoImage, alt: 'Gallery Image 2' },
-    { id: 3, src: gavImage, alt: 'Gallery Image 3' },
-    { id: 4, src: kakaImage, alt: 'Gallery Image 4' },
-    { id: 5, src: mandirImage, alt: 'Gallery Image 5' },
-    { id: 6, src: infoImage, alt: 'Gallery Image 6' },
-    { id: 7, src: gavImage, alt: 'Gallery Image 7' },
-    { id: 8, src: kakaImage, alt: 'Gallery Image 8' },
-    { id: 9, src: mandirImage, alt: 'Gallery Image 9' },
-  ];
+  const heroImage = galleryImages[0]?.src || gavImage;
 
   return (
     <div>
       <PageHero 
         title="फोटो गॅलरी" 
         subtitle="माहिती"
-        image={gavImage}
+        image={heroImage}
       />
       <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
@@ -41,21 +50,31 @@ const GalleryPage = () => {
           </h2>
 
           {/* Gallery Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {images.map((image) => (
-              <div
-                key={image.id}
-                className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-[300px] object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300"></div>
-              </div>
-            ))}
-          </div>
+          {galleryImages.length === 0 ? (
+            <div className="text-center text-gray-600 py-12">
+              सध्या कोणत्याही प्रतिमा उपलब्ध नाहीत. कृपया नंतर पुन्हा तपासा.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {galleryImages.map((image) => (
+                <figure
+                  key={image.id}
+                  className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-2xl transition-shadow duration-300"
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    loading="lazy"
+                    className="w-full h-[300px] object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent text-white text-sm px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {image.alt}
+                  </figcaption>
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300" aria-hidden="true"></div>
+                </figure>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

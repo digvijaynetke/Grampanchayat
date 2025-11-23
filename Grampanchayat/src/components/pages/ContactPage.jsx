@@ -56,7 +56,7 @@ const ContactPage = () => {
                     <div>
                       <h4 className="font-semibold text-gray-800 mb-1">ईमेल</h4>
                       <a href="mailto:chdvadalibhoi@gmail.com" className="text-gray-600 hover:text-teal-600 transition">
-                        chdvadalibhoi@gmail.com
+                        chXXXXXXXX@gmail.com
                       </a>
                     </div>
                   </div>
@@ -70,7 +70,7 @@ const ContactPage = () => {
                     <div>
                       <h4 className="font-semibold text-gray-800 mb-1">पत्ता</h4>
                       <p className="text-gray-600">
-                        At/Post-XXXXXXXX<br />
+                        At/Post-उर्धूळ<br />
                         तालुका-चांदवड<br />
                         जिल्हा-नाशिक
                       </p>

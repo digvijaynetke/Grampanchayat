@@ -1,33 +1,38 @@
-import mandirImage from '../images/mandir.jpg';
+import image1 from '../images/1.jpeg';
+import image2 from '../images/2.jpeg';
+import image3 from '../images/3.jpeg';
 
 const News = () => {
   const newsItems = [
-   {
+    {
       id: 1,
-      image: mandirImage,
-      title: 'नमुना बातमी',
-      description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
-      date: '24 Sep 2025',
-      category: 'न्युज/अपडेट्स',
-      village: 'XXXXXXXXX '
+      image: image1,
+      title: 'ग्रामपंचायत कार्यालय',
+      description:
+        'ग्रामपंचायत कार्यालय हे गावाच्या विकास आणि प्रशासनासाठी महत्त्वाचे केंद्र आहे. येथे ग्रामपंचायतच्या विविध कार्यक्रम आणि योजनांची माहिती उपलब्ध आहे.',
+      date: '22 Sep 2025',
+      category: 'ग्रामपंचायत कार्यालय',
+      village: 'उर्धुळ '
     },
     {
       id: 2,
-      image: mandirImage,
-      title: 'नमुना बातमी',
-      description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
+      image: image2,
+      title: 'ग्रामपंचायत कार्यालय',
+      description:
+        'ग्रामपंचायत कार्यालयातून गावाच्या विकासासाठी विविध योजना आणि कार्यक्रम राबविण्यात येतात. नागरिकांना येथे सर्व प्रकारची सेवा उपलब्ध करण्यात येतात.',
       date: '22 Sep 2025',
-      category: 'न्युज/अपडेट्स',
-      village: 'XXXXXXXXX '
+      category: 'ग्रामपंचायत कार्यालय',
+      village: 'उर्धुळ '
     },
     {
       id: 3,
-      image: mandirImage,
-      title: 'नमुना बातमी',
-      description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
+      image: image3,
+      title: 'ग्रामपंचायत कार्यालय',
+      description:
+        'ग्रामपंचायत कार्यालय हे गावाच्या सर्व अधिकृत कामकाजाचे केंद्र आहे. येथे गावातील सर्व महत्त्वाच्या निर्णय घेण्यात येतात.',
       date: '22 Sep 2025',
-      category: 'न्युज/अपडेट्स',
-      village: 'XXXXXXXXX '
+      category: 'ग्रामपंचायत कार्यालय',
+      village: 'उर्धुळ '
     }
   ];
 
@@ -43,7 +48,7 @@ const News = () => {
 
           {/* Main Heading */}
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-teal-800">
-            न्युज/अपडेट्स
+            ग्रामपंचायत कार्यालय
           </h2>
 
           {/* News Grid */}

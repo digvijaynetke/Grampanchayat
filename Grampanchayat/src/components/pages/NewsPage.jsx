@@ -6,7 +6,7 @@ const NewsPage = () => {
   return (
     <div>
       <PageHero 
-        title="न्युज/अपडेट्स" 
+        title="ग्रामपंचायत कार्यालय" 
         subtitle="माहिती"
         image={mandirImage}
       />

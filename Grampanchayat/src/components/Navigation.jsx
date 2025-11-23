@@ -7,8 +7,8 @@ const Navigation = ({ onOpenComplaint }) => {
   const menuItems = [
     { label: 'होम', link: '#home' },
     { label: 'आमच्याबद्दल', link: '#about' },
-    { label: 'न्युज/अपडेट्स', link: '#news' },
-    { label: 'पुरस्कार / यशोगाथा', link: '#awards' },
+    { label: 'ग्रामपंचायत कार्यालय', link: '#news' },
+    { label: 'विकास कामे', link: '#awards' },
     { label: 'पर्यटन स्थळ', link: '#tourism' },
     { label: 'फोटो गॅलरी', link: '#gallery' },
     {
@@ -38,7 +38,7 @@ const Navigation = ({ onOpenComplaint }) => {
             <img src={logo} alt="logo" className="w-12 h-12 object-cover rounded-full shadow-md" />
             <div className="text-left">
               <div className="text-lg md:text-xl font-bold text-gray-800">
-                XXXXXXXX ग्रामपंचायत
+                उर्धुळ ग्रामपंचायत
               </div>
               <div className="text-sm md:text-sm text-gray-600">
                 पंचायत समिती चांदवड, तालुका चांदवड, जि.नाशिक
