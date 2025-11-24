@@ -1,21 +1,22 @@
 import PageHero from '../PageHero';
 import mandirImage from '../../images/mandir.jpg';
-import infoImage from '../../images/info.jpg';
 import gavImage from '../../images/gav.jpg';
-import kakaImage from '../../images/kaka.jpg';
+
+const imageModules = import.meta.glob('../../images/*.{png,jpg,jpeg,jpe,jfif,gif,webp}', {
+  eager: true,
+});
 
 const GalleryPage = () => {
-  const images = [
-    { id: 1, src: mandirImage, alt: 'Gallery Image 1' },
-    { id: 2, src: infoImage, alt: 'Gallery Image 2' },
-    { id: 3, src: gavImage, alt: 'Gallery Image 3' },
-    { id: 4, src: kakaImage, alt: 'Gallery Image 4' },
-    { id: 5, src: mandirImage, alt: 'Gallery Image 5' },
-    { id: 6, src: infoImage, alt: 'Gallery Image 6' },
-    { id: 7, src: gavImage, alt: 'Gallery Image 7' },
-    { id: 8, src: kakaImage, alt: 'Gallery Image 8' },
-    { id: 9, src: mandirImage, alt: 'Gallery Image 9' },
-  ];
+  const images = Object.entries(imageModules)
+    .map(([path, module], index) => {
+      const fileName = path.split('/').pop();
+      return {
+        id: index + 1,
+        src: module.default || module,
+        alt: fileName?.replace(/[-_]/g, ' ') || `Gallery Image ${index + 1}`,
+      };
+    })
+    .sort((a, b) => a.alt.localeCompare(b.alt));
 
   return (
     <div>
