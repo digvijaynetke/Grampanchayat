@@ -7,9 +7,9 @@ const Navigation = ({ onOpenComplaint }) => {
   const menuItems = [
     { label: 'होम', link: '#home' },
     { label: 'आमच्याबद्दल', link: '#about' },
-    { label: 'न्युज/अपडेट्स', link: '#news' },
+    { label: 'पर्यटन स्थळ', link: '#news' },
     { label: 'पुरस्कार / यशोगाथा', link: '#awards' },
-    { label: 'पर्यटन स्थळ', link: '#tourism' },
+    // { label: 'पर्यटन स्थळ', link: '#tourism' },
     { label: 'फोटो गॅलरी', link: '#gallery' },
     {
       label: 'इतर',
@@ -18,7 +18,7 @@ const Navigation = ({ onOpenComplaint }) => {
         { label: 'आरोग्य दवाखाने', link: '#health' },
         { label: 'शाळा', link: '#school' },
         { label: 'शेती', link: '#agriculture' },
-        { label: 'सूचना फलक', link: '#notice' },
+        { label: 'विकास कामे', link: '#notice' },
         { label: 'गावाची माहिती', link: '#village-info' },
         { label: 'पशुवैद्यकीय दवाखाने', link: '#veterinary' },
         { label: 'बचत गट माहिती', link: '#savings-group' },
@@ -38,10 +38,10 @@ const Navigation = ({ onOpenComplaint }) => {
             <img src={logo} alt="logo" className="w-12 h-12 object-cover rounded-full shadow-md" />
             <div className="text-left">
               <div className="text-lg md:text-xl font-bold text-gray-800">
-                XXXXXXXX ग्रामपंचायत
+                मेटघर किल्ला ग्रामपंचायत
               </div>
               <div className="text-sm md:text-sm text-gray-600">
-                पंचायत समिती चांदवड, तालुका चांदवड, जि.नाशिक
+                 तालुका त्र्यंबकेश्वर, जि.नाशिक
               </div>
             </div>
           </div>

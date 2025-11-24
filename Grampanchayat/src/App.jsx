@@ -5,7 +5,7 @@ import Home from './components/home/Home';
 import AboutPage from './components/pages/AboutPage';
 import NewsPage from './components/pages/NewsPage';
 import AwardsPage from './components/pages/AwardsPage';
-import TourismPage from './components/pages/TourismPage';
+// import TourismPage from './components/pages/TourismPage';
 import GalleryPage from './components/pages/GalleryPage';
 import TemplePage from './components/pages/TemplePage';
 import HealthPage from './components/pages/HealthPage';
@@ -64,8 +64,8 @@ function App() {
         return <NewsPage />;
       case 'awards':
         return <AwardsPage />;
-      case 'tourism':
-        return <TourismPage />;
+      // case 'tourism':
+      //   return <TourismPage />;
       case 'gallery':
         return <GalleryPage />;
       case 'temple':

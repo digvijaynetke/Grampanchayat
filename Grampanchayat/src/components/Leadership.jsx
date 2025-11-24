@@ -1,9 +1,60 @@
 import { useHomeData } from '../hooks/useHomeData';
-import kakaImage from '../images/kaka.jpg'; // Fallback image
+import kakaImage from '../images/kaka.jpg'; // Generic fallback image
+import sarpanchImage from '../images/sarpanch.png';
+import gramsevakImage from '../images/gramsevak.png';
 
 const Leadership = () => {
   const { data, loading } = useHomeData();
   const language = 'mr'; // Default to Marathi
+  const fallbackSarpanchName = 'संपूर्ण नाव';
+  const fallbackSarpanchRole = 'सरपंच';
+  const fallbackSarpanchDescription =
+    'गावाच्या सर्वांगीण विकासासाठी, शेतकऱ्यांच्या प्रगतीसाठी, महिला बालकांच्या कल्याणासाठी तसेच सामाजिक ऐक्य राखण्यासाठी आमचे सरपंच नेहमीच पुढाकार घेतात. ग्रामस्थांच्या सक्रिय सहभागाने, पंचायत प्रगती आणि एकतेसाठी काम करते.';
+  const fallbackContacts = {
+    sarpanch: '+91 9876543210',
+    उपसरपंच: '+91 9876500001',
+    'ग्राम पंचायत अधिकारी': '+91 9876500002',
+    सदस्य: '+91 9876500003',
+  };
+  const placeholderTeamMembers = [
+    {
+      id: 'placeholder-1',
+      name: 'संपूर्ण नाव',
+      role: 'उपसरपंच',
+      image: kakaImage,
+      contact: fallbackContacts['उपसरपंच'],
+    },
+    {
+      id: 'placeholder-2',
+      name: 'गणेश पागर',
+      role: 'ग्राम पंचायत अधिकारी',
+      image: gramsevakImage,
+      contact: fallbackContacts['ग्राम पंचायत अधिकारी'],
+    },
+    {
+      id: 'placeholder-3',
+      name: 'संपूर्ण नाव',
+      role: 'सदस्य',
+      image: kakaImage,
+      contact: fallbackContacts['सदस्य'],
+    },
+  ];
+
+  const getLocalizedField = (field, fallback = '') => {
+    if (!field) return fallback;
+    if (typeof field === 'string') return field || fallback;
+    return field[language] || field.mr || field.en || fallback;
+  };
+
+  const normalizeContact = (contact, fallback) => {
+    const value = contact?.toString().trim();
+    if (!value) return fallback;
+    if (value.startsWith('+91')) return value;
+    if (/^\d{10}$/.test(value)) {
+      return `+91 ${value}`;
+    }
+    return value;
+  };
 
   const getApiBaseUrl = () => {
     // If on localhost, check .env file first
@@ -14,8 +65,8 @@ const Leadership = () => {
     return 'https://grampanchayat-website-project-code.onrender.com/api';
   };
   // Helper to get full image URL
-  const getImageUrl = (imageUrl) => {
-    if (!imageUrl) return kakaImage;
+  const getImageUrl = (imageUrl, fallbackImage = kakaImage) => {
+    if (!imageUrl) return fallbackImage;
     if (imageUrl.startsWith('http')) return imageUrl;
     
     // API returns URLs like "/api/images/..." 
@@ -34,6 +85,14 @@ const Leadership = () => {
   const leadershipData = data?.leadership;
   const sarpanch = leadershipData?.sarpanch;
   const teamMembers = leadershipData?.teamMembers || [];
+  const sarpanchName = getLocalizedField(sarpanch?.name, fallbackSarpanchName);
+  const sarpanchRoleLabel = getLocalizedField(sarpanch?.role, fallbackSarpanchRole);
+  const sarpanchDescription = getLocalizedField(
+    sarpanch?.description,
+    fallbackSarpanchDescription
+  );
+  const sarpanchImageSrc = getImageUrl(sarpanch?.image, sarpanchImage);
+  const sarpanchContact = normalizeContact(sarpanch?.contact, fallbackContacts.sarpanch);
 
   return (
     <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
@@ -62,25 +121,26 @@ const Leadership = () => {
               {/* Two Column Layout */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
                 {/* Left Column - Sarpanch Card */}
-                <div className="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-shadow duration-300">
+                <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-300 group">
                   <div className="p-2 bg-gradient-to-br from-teal-50 to-blue-50">
-                    <div className="bg-white rounded-lg p-4">
-                      <div className="mb-6 overflow-hidden rounded-lg shadow-md">
+                    <div className="bg-white rounded-2xl p-5">
+                      <div className="mb-6 overflow-hidden rounded-2xl shadow-md bg-gradient-to-b from-slate-50 to-white flex items-center justify-center h-[420px] relative">
                           <img 
-                            src={getImageUrl(sarpanch?.image)} 
-                            alt={sarpanch?.role?.[language] || sarpanch?.role?.mr || 'सरपंच'} 
-                            className="w-full h-[400px] object-cover object-center hover:scale-105 transition-transform duration-500"
+                            src={sarpanchImageSrc} 
+                            alt={sarpanchRoleLabel} 
+                            className="w-full h-full object-contain object-center transition-transform duration-500 ease-out group-hover:scale-105"
                             loading="lazy"
                             style={{ imageRendering: 'auto' }}
                           />
+                          <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-white opacity-0 group-hover:opacity-70 transition-opacity duration-500"></div>
                       </div>
                       <div className="text-center space-y-2">
                         <h3 className="text-2xl md:text-3xl font-bold text-blue-800 mb-2">
-                          {sarpanch?.name?.[language] || sarpanch?.name?.mr || 'संपूर्ण नाव'}
+                          {sarpanchName}
                         </h3>
                         <div className="inline-block px-4 py-1 bg-teal-100 rounded-full mb-2">
                           <p className="text-lg font-semibold text-teal-800">
-                            {sarpanch?.role?.[language] || sarpanch?.role?.mr || 'सरपंच'}
+                            {sarpanchRoleLabel}
                           </p>
                         </div>
                         {sarpanch?.village && (
@@ -88,6 +148,14 @@ const Leadership = () => {
                             {sarpanch.village?.[language] || sarpanch.village?.mr || ''}
                           </p>
                         )}
+                        <div className="flex items-center justify-center gap-2 text-base font-semibold text-teal-700">
+                          <span className="inline-flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h2l3.6 7.59a1 1 0 00.9.59H17a1 1 0 010 2h-5M6 5V3a1 1 0 011-1h2m8 0h2a1 1 0 011 1v2m-2 16h-2a1 1 0 01-1-1v-2M7 21H5a1 1 0 01-1-1v-2" />
+                            </svg>
+                            {sarpanchContact}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -101,7 +169,7 @@ const Leadership = () => {
                       <h3 className="text-2xl md:text-3xl font-bold text-white">आमचे नेतृत्व</h3>
                     </div>
                     <p className="text-white text-lg md:text-xl leading-relaxed text-left">
-                      {sarpanch?.description?.[language] || sarpanch?.description?.mr || 'गावाच्या सर्वांगीण विकासासाठी, शेतकऱ्यांच्या प्रगतीसाठी, महिला बालकांच्या कल्याणासाठी तसेच सामाजिक ऐक्य राखण्यासाठी आमचे सरपंच नेहमीच पुढाकार घेतात. ग्रामस्थांच्या सक्रिय सहभागाने, पंचायत प्रगती आणि एकतेसाठी काम करते.'}
+                      {sarpanchDescription}
                     </p>
                     <div className="pt-4 flex items-center gap-2">
                       <div className="w-8 h-0.5 bg-white"></div>
@@ -116,61 +184,86 @@ const Leadership = () => {
               <div className="mt-24 md:mt-32">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                   {teamMembers.length > 0 ? (
-                    teamMembers.map((member) => (
-                      <div 
-                        key={member.id}
-                        className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
-                      >
-                        <div className="overflow-hidden">
-                          <img 
-                            src={getImageUrl(member.image)} 
-                            alt={member.role?.[language] || member.role?.mr || 'सदस्य'} 
-                            className="w-full h-[350px] object-cover object-center hover:scale-110 transition-transform duration-500"
-                            loading="lazy"
-                            style={{ imageRendering: 'auto' }}
-                          />
-                        </div>
-                        <div className="p-6 text-center space-y-2">
-                          <h3 className="text-xl md:text-2xl font-bold text-blue-800 mb-2">
-                            {member.name?.[language] || member.name?.mr || 'संपूर्ण नाव'}
-                          </h3>
-                          <div className="inline-block px-3 py-1 bg-teal-100 rounded-full mb-1">
-                            <p className="text-base font-semibold text-teal-800">
-                              {member.role?.[language] || member.role?.mr || 'सदस्य'}
+                    teamMembers.map((member, index) => {
+                      const roleLabelRaw = getLocalizedField(member.role, 'सदस्य');
+                      const roleLabel = roleLabelRaw?.trim() || 'सदस्य';
+                      const isGramPanchayatOfficer = roleLabel === 'ग्राम पंचायत अधिकारी';
+                      const fallbackMemberName = isGramPanchayatOfficer ? 'गणेश पागर' : 'संपूर्ण नाव';
+                      const memberName = getLocalizedField(member.name, fallbackMemberName);
+                      const memberImageSrc = getImageUrl(
+                        member.image,
+                        isGramPanchayatOfficer ? gramsevakImage : kakaImage
+                      );
+                      const memberVillage = getLocalizedField(member.village, '');
+                      const fallbackContact = isGramPanchayatOfficer
+                        ? fallbackContacts['ग्राम पंचायत अधिकारी']
+                        : fallbackContacts[roleLabel] || fallbackContacts['सदस्य'];
+                      const memberContact = normalizeContact(
+                        member.contact,
+                        fallbackContact || `+91 98765000${index}`
+                      );
+
+                      return (
+                        <div
+                          key={member.id}
+                          className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group"
+                        >
+                          <div className="overflow-hidden bg-gradient-to-b from-slate-50 to-white flex items-center justify-center h-[360px]">
+                            <img
+                              src={memberImageSrc}
+                              alt={roleLabel}
+                              className="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105"
+                              loading="lazy"
+                              style={{ imageRendering: 'auto' }}
+                            />
+                          </div>
+                          <div className="p-6 text-center space-y-2">
+                            <h3 className="text-xl md:text-2xl font-bold text-blue-800 mb-2">
+                              {memberName}
+                            </h3>
+                            <div className="inline-block px-3 py-1 bg-teal-100 rounded-full mb-1">
+                              <p className="text-base font-semibold text-teal-800">
+                                {roleLabel}
+                              </p>
+                            </div>
+                            {memberVillage && (
+                              <p className="text-sm text-gray-600 font-medium">
+                                {memberVillage}
+                              </p>
+                            )}
+                            <p className="text-sm font-semibold text-teal-700 tracking-wide">
+                              {memberContact}
                             </p>
                           </div>
-                          {member.village && (
-                            <p className="text-sm text-gray-600 font-medium">
-                              {member.village?.[language] || member.village?.mr || ''}
-                            </p>
-                          )}
                         </div>
-                      </div>
-                    ))
+                      );
+                    })
                   ) : (
-                    // Show 3 default placeholder cards when no team members
-                    [1, 2, 3].map((index) => (
-                      <div 
-                        key={`placeholder-${index}`}
-                        className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                    placeholderTeamMembers.map((member) => (
+                      <div
+                        key={member.id}
+                        className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group"
                       >
-                        <div className="overflow-hidden">
-                          <img 
-                            src={kakaImage} 
-                            alt="सदस्य" 
-                            className="w-full h-[350px] object-cover object-center hover:scale-110 transition-transform duration-500"
+                        <div className="overflow-hidden bg-gradient-to-b from-slate-50 to-white flex items-center justify-center h-[360px]">
+                          <img
+                            src={member.image}
+                            alt={member.role}
+                            className="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105"
                             loading="lazy"
                           />
                         </div>
                         <div className="p-6 text-center space-y-2">
                           <h3 className="text-xl md:text-2xl font-bold text-blue-800 mb-2">
-                            संपूर्ण नाव
+                            {member.name}
                           </h3>
                           <div className="inline-block px-3 py-1 bg-teal-100 rounded-full mb-1">
                             <p className="text-base font-semibold text-teal-800">
-                              {index === 1 ? 'उपसरपंच' : index === 2 ? 'ग्राम पंचायत अधिकारी' : 'सदस्य'}
+                              {member.role}
                             </p>
                           </div>
+                          <p className="text-sm font-semibold text-teal-700 tracking-wide">
+                            {member.contact}
+                          </p>
                         </div>
                       </div>
                     ))

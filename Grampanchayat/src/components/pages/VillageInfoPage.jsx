@@ -22,14 +22,14 @@ const VillageInfoPage = () => {
               <div className="prose max-w-none">
                 <h3 className="text-2xl font-bold text-gray-800 mb-4">गाव परिचय</h3>
                 <p className="text-gray-700 leading-relaxed mb-6">
-                  वडाळीभोई हे एक समृद्ध व शांत गाव आहे, जिथे शेती, परंपरा आणि एकतेला महत्त्व दिले जाते. 
+                  मेटघर किल्ला हे एक समृद्ध व शांत गाव आहे, जिथे शेती, परंपरा आणि एकतेला महत्त्व दिले जाते. 
                   गावात साक्षरतेचा दर उच्च आहे आणि शिक्षणाचा दर्जा चांगला आहे. 
                   स्वतःची ग्रामपंचायत असल्याने स्थानिक पातळीवर प्रशासनाची सुविधा उपलब्ध आहे.
                 </p>
                 
                 <h3 className="text-2xl font-bold text-gray-800 mb-4">स्थान</h3>
                 <p className="text-gray-700 leading-relaxed mb-6">
-                  At/Post-XXXXXXXX, तालुका-चांदवड, जिल्हा-नाशिक
+                  At/Post-मेटघर किल्ला , तालुका-चांदवड, जिल्हा-नाशिक
                 </p>
 
                 <h3 className="text-2xl font-bold text-gray-800 mb-4">मुख्य वैशिष्ट्ये</h3>

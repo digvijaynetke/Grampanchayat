@@ -6,7 +6,7 @@ const NoticeBoardPage = () => {
   return (
     <div>
       <PageHero 
-        title="सूचना फलक" 
+        title="विकास कामे" 
         subtitle="माहिती"
         image={infoImage}
       />

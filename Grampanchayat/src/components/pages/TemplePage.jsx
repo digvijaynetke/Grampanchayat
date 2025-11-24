@@ -8,21 +8,21 @@ const TemplePage = () => {
       image: mandirImage,
       name: 'मंदिर 1',
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
-      location: 'XXXXXXXXX '
+      location: 'मेटघर किल्ला  '
     },
     {
       id: 2,
       image: mandirImage,
       name: 'मंदिर 2',
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
-      location: 'XXXXXXXXX '
+      location: 'मेटघर किल्ला  '
     },
     {
       id: 3,
       image: mandirImage,
       name: 'मंदिर 3',
       description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल.',
-      location: 'XXXXXXXXX '
+      location: 'मेटघर किल्ला  '
     }
   ];
 

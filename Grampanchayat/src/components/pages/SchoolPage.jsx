@@ -1,32 +1,29 @@
 import PageHero from '../PageHero';
 import gavImage from '../../images/gav.jpg';
 import mandirImage from '../../images/mandir.jpg';
+import scImage1 from '../../images/sc1.png';
+import scImage2 from '../../images/sc2.png';
+import schoolVideo from '../../images/sc2.mp4';
 
 const SchoolPage = () => {
   const schools = [
     {
       id: 1,
-      name: 'शाळा 1',
-      description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल..',
+      name: 'मेटघर जिल्हा परिषद शाळा',
+      description:
+        'गावातील मुलांसाठी प्राथमिक ते माध्यमिक शिक्षणाची सोय. आधुनिक प्रयोगशाळा, क्रीडा मैदाने आणि स्मार्ट क्लासरूममुळे विद्यार्थ्यांना सक्षम वातावरण मिळते.',
       level: 'प्राथमिक आणि माध्यमिक',
       students: '200+',
-      location: 'XXXXXXXXX '
+      location: 'मेटघर किल्ला'
     },
     {
       id: 2,
-      name: 'शाळा 2',
-      description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल..',
-      level: 'माध्यमिक',
+      name: 'मेटघर कनिष्ठ महाविद्यालय',
+      description:
+        'विज्ञान आणि कला शाखांसाठी कुशल शिक्षकवर्ग, ग्रंथालय आणि प्रयोगशाळांची उत्तम सुविधा. विद्यार्थ्यांचा निकाल सातत्याने श्रेष्ठ राहिला आहे.',
+      level: 'उच्च-माध्यमिक',
       students: '150+',
-      location: 'XXXXXXXXX '
-    },
-    {
-      id: 3,
-      name: 'शाळा 3',
-      description: 'या कार्डवरची माहिती लवकरच अद्ययावत केली जाईल..',
-      level: 'प्राथमिक',
-      students: '100+',
-      location: 'XXXXXXXXX '
+      location: 'मेटघर किल्ला'
     }
   ];
 
@@ -44,17 +41,23 @@ const SchoolPage = () => {
             शाळा
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {schools.map((school) => (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {schools.map((school, index) => (
               <div
                 key={school.id}
-                className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+                className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-300 group"
               >
-                <img
-                  src={gavImage}
-                  alt={school.name}
-                  className="w-full h-[200px] object-cover"
-                />
+                <div className="relative overflow-hidden h-64">
+                  <img
+                    src={index === 0 ? scImage1 : scImage2}
+                    alt={school.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
+                  <span className="absolute top-4 left-4 bg-white/90 text-teal-700 font-semibold px-4 py-1 rounded-full shadow">
+                    मेटघर किल्ला
+                  </span>
+                </div>
                 <div className="p-6">
                   <h3 className="text-2xl font-bold text-teal-800 mb-3">
                     {school.name}
@@ -82,6 +85,37 @@ const SchoolPage = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Video Highlight */}
+          <div className="mt-12">
+            <div className="bg-gradient-to-r from-teal-50 via-white to-teal-50 border border-teal-100 rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row items-stretch">
+              <div className="md:w-1/2">
+                <video
+                  src={schoolVideo}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="md:w-1/2 p-8 space-y-4">
+                <p className="text-sm uppercase tracking-[0.3em] text-teal-500">मेटघर किल्ला</p>
+                <h3 className="text-3xl font-bold text-gray-900">आमच्या गावातील शिक्षणाचा अभिमान</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  आधुनिक सुविधा, अनुभवी शिक्षक आणि प्रगत शैक्षणिक उपक्रम यामुळे मेटघर किल्ल्यातील शाळा सतत प्रगतीचा ध्यास घेत आहेत. विद्यार्थ्यांना गुणवत्ता शिक्षण मिळावे म्हणून डिजिटल क्लासरूम, ग्रंथालय, क्रीडा मैदाने आणि विविध उपक्रम राबवले जातात.
+                </p>
+                <p className="text-gray-600">
+                  बालकांपासून ते उच्च-माध्यमिक विद्यार्थ्यांपर्यंत सर्वांसाठी सुरक्षित, सर्जनशील आणि प्रेरणादायी वातावरण निर्माण करणे हे आमचे ध्येय आहे.
+                </p>
+                <div className="flex flex-wrap gap-3 text-sm font-semibold text-teal-700">
+                  <span>📍 मेटघर किल्ला</span>
+                  <span>🎓 सर्वसमावेशक शिक्षण</span>
+                  <span>🎥 प्रेरणादायी कथा</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,27 +1,27 @@
 const PopulationStats = () => {
   const genderStats = [
-    { category: 'महिला', female: 926, male: 0, total: 926 },
-    { category: 'पुरुष', female: 0, male: 891, total: 891 },
-    { category: 'एकूण लोकसंख्या', female: 926, male: 891, total: 1853 },
+    { category: 'महिला', female: '-', male: '-', total: '-' },
+    { category: 'पुरुष', female: '-', male: '-', total: '-' },
+    { category: 'एकूण लोकसंख्या', female: '-', male: '-', total: '-' },
   ];
 
   const casteStats = [
-    { category: 'अनुसुचीत जाती (SC)', female: 68, male: 72, total: 140 },
-    { category: 'अनुसुचीत जमाती(ST)', female: 16, male: 12, total: 28 },
-    { category: 'इतर मागास वग(OBC)', female: 55, male: 78, total: 133 },
-    { category: 'विशेष मागास प्रवर्ग (SBC)', female: 90, male: 66, total: 150 },
-    { category: 'भटक्या जमाती -अ (VJ)', female: 110, male: 120, total: 230 },
-    { category: 'भटक्या जमाती - ब(NT-B)', female: 95, male: 72, total: 162 },
-    { category: 'भटक्या जमाती - क (NT-C)', female: 88, male: 100, total: 188 },
-    { category: 'भटक्या जमाती - ड (NT-D)', female: 65, male: 80, total: 145 },
-    { category: 'खुला प्रवर्ग(OPEN))', female: 92, male: 75, total: 167 },
-    { category: 'एकूण लोकसंख्या', female: 679, male: 665, total: 1344 },
+    { category: 'अनुसुचीत जाती (SC)', female: '-', male: '-', total: '-' },
+    { category: 'अनुसुचीत जमाती(ST)', female: '-', male: '-', total: '-' },
+    { category: 'इतर मागास वग(OBC)', female: '-', male: '-', total: '-' },
+    { category: 'विशेष मागास प्रवर्ग (SBC)', female: '-', male: '-', total: '-' },
+    { category: 'भटक्या जमाती -अ (VJ)', female: '-', male: '-', total: '-' },
+    { category: 'भटक्या जमाती - ब(NT-B)', female: '-', male: '-', total: '-' },
+    { category: 'भटक्या जमाती - क (NT-C)', female: '-', male: '-', total: '-' },
+    { category: 'भटक्या जमाती - ड (NT-D)', female: '-', male: '-', total: '-' },
+    { category: 'खुला प्रवर्ग(OPEN))', female: '-', male: '-', total: '-' },
+    { category: 'एकूण लोकसंख्या', female: '-', male: '-', total: '-' },
   ];
 
   const villageStats = [
-    { category: 'महिला', female: 579, male: 0, total: 579 },
-    { category: 'पुरुष', female: 0, male: 590, total: 590 },
-    { category: 'एकूण', female: 579, male: 590, total: 1169 },
+    { category: 'महिला', female: '-', male: '-', total: '-' },
+    { category: 'पुरुष', female: '-', male: '-', total: '-' },
+    { category: 'एकूण', female: '-', male: '-', total: '-' },
   ];
 
   return (
@@ -37,6 +37,9 @@ const PopulationStats = () => {
               आमच्या गावातील पुरुष, स्त्रिया व एकूण लोकसंख्या माहिती
             </h3>
             
+            <p className="text-center text-sm text-amber-600 font-semibold mb-4">
+              ही माहिती लवकरच अद्ययावत केली जाईल.
+            </p>
             <div className="overflow-x-auto">
               <table className="w-full bg-white rounded-lg shadow-md overflow-hidden">
                 <thead className="bg-blue-600 text-white">
@@ -65,6 +68,9 @@ const PopulationStats = () => {
               गावातील जातीनुसार मतदार संघ
             </h3>
             
+            <p className="text-center text-sm text-amber-600 font-semibold mb-4">
+              ही माहिती लवकरच अद्ययावत केली जाईल.
+            </p>
             <div className="overflow-x-auto">
               <table className="w-full bg-white rounded-lg shadow-md overflow-hidden">
                 <thead className="bg-blue-600 text-white">
